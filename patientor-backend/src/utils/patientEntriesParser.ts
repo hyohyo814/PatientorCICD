@@ -38,7 +38,7 @@ const entriesParser = (entry: unknown): EntryWithoutId | null => {
           };
 
           if ('diagnosisCodes' in entry) {
-            console.log('diagnosisCodes exists');
+            // console.log('diagnosisCodes exists');
             entryHosp = {
               ...entryHosp,
               diagnosisCodes: parseStringArr(entry.diagnosisCodes),
@@ -59,7 +59,7 @@ const entriesParser = (entry: unknown): EntryWithoutId | null => {
           };
 
           if ('diagnosisCodes' in entry) {
-            console.log('diagnosisCodes exists');
+            // console.log('diagnosisCodes exists');
             entryOcc = {
               ...entryOcc,
               diagnosisCodes: parseStringArr(entry.diagnosisCodes),
@@ -73,7 +73,7 @@ const entriesParser = (entry: unknown): EntryWithoutId | null => {
             'startDate' in entry.sickLeave &&
             'endDate' in entry.sickLeave
           ) {
-            console.log('sickLeave exists');
+            // console.log('sickLeave exists');
             entryOcc = {
               ...entryOcc,
               sickLeave: {
