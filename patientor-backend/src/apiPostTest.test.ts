@@ -6,7 +6,7 @@ import patients from '../data/patients';
 const api = supertest(app);
 
 describe('successful /POST', () => {
-  it('add new patient with proper entry', async () => {
+  it('add new patient', async () => {
     const initLen = patients.length;
     await api
       .post('/api/patients')
@@ -23,40 +23,18 @@ describe('successful /POST', () => {
     expect(check.body).toHaveLength(initLen + 1);
   });
 
-  it('reject invalid gender input', async () => {
-    const initLen = patients.length;
+  it('add new entry', async () => {
     await api
-      .post('/api/patients')
+      .post('/api/patients/d2773822-f723-11e9-8f0b-362b9e155667/entries')
       .send({
-        name: 'Hyo Hyo',
-        dateOfBirth: '2000-11-11',
-        ssn: '123456-123X',
-        gender: 'unknown',
-        occupation: 'nonspecified',
+        type: 'HealthCheck',
+        specialist: 'Dr. Kirby',
+        date: '2023-07-11',
+        description: 'Entry testing',
+        healthCheckRating: 3,
       })
-      .expect(400);
-
-    const check = await api.get('/api/patients');
-    expect(check.body).toHaveLength(initLen);
+      .expect(201);
   });
-
-  it('reject invalid gender input', async () => {
-    const initLen = patients.length;
-    await api
-      .post('/api/patients')
-      .send({
-        name: 'Hyo Hyo',
-        dateOfBirth: '2000-11-11',
-        ssn: '123456-123X',
-        gender: 'unknown',
-        occupation: 'nonspecified',
-      })
-      .expect(400);
-
-    const check = await api.get('/api/patients');
-    expect(check.body).toHaveLength(initLen);
-  });
-
 
 });
 

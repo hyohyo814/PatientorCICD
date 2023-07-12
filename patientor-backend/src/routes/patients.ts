@@ -35,7 +35,7 @@ router.post('/:id/entries', (req, res) => {
   try {
     const newEntry = entriesParser(req.body);
     if (newEntry) {
-      res.send(patientService.postEntry(req.params.id, newEntry));
+      res.status(201).send(patientService.postEntry(req.params.id, newEntry));
     }
   } catch (error: unknown) {
     let errorMessage = 'An error has occurred.';
