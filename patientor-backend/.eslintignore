@@ -1,0 +1,4 @@
+.eslintrc
+.gitignore
+build/*.js
+node_modules/
