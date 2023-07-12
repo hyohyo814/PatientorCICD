@@ -17,11 +17,11 @@ const AcceptedPatientEntry = (obj: unknown): NewPatient => {
     if ('entries' in obj && obj.entries instanceof Array) {
       obj.entries.forEach((entry: EntryWithoutId) => {
         const append = entriesParser(entry);
-        console.log(obj.name);
-        console.log(append);
+        // console.log(obj.name);
+        // console.log(append);
         if (append) {
           entries.push(append);
-          console.log(entries);
+          // console.log(entries);
         }
       });
     }
