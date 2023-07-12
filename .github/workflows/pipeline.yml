@@ -1,0 +1,64 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  backend_deployment_pipeline:
+    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: |
+          cd patientor-backend
+          npm i
+      - name: Check style
+        run: |
+          cd patientor-backend
+          npm run lint
+  frontend_deployment_pipeline:
+    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: |
+          cd patientor-frontend
+          npm i
+      - name: Check style
+        run: |
+          cd patientor-frontend
+          npm run lint
+  tag_release:
+    if: ${{ github.event_name == 'push' }}
+    needs: [backend_deployment_pipeline, frontend_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
+
+    
+
