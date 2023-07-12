@@ -23,7 +23,7 @@ describe('successful /POST', () => {
     expect(check.body).toHaveLength(initLen + 1);
   });
 
-  it('add new entry', async () => {
+  it('add new HealthCheck entry', async () => {
     await api
       .post('/api/patients/d2773822-f723-11e9-8f0b-362b9e155667/entries')
       .send({
@@ -32,6 +32,43 @@ describe('successful /POST', () => {
         date: '2023-07-11',
         description: 'Entry testing',
         healthCheckRating: 3,
+      })
+      .expect(201);
+  });
+
+  it('add new Hospital entry', async () => {
+    await api
+      .post('/api/patients/d2773822-f723-11e9-8f0b-362b9e155667/entries')
+      .send({
+        date: '2015-01-02',
+        type: 'Hospital',
+        specialist: 'MD House',
+        diagnosisCodes: ['S62.5'],
+        description:
+          "Healing time appr. 2 weeks. patient doesn't remember how he got the injury.",
+        discharge: {
+          date: '2015-01-16',
+          criteria: 'Thumb has healed.',
+        },
+      })
+      .expect(201);
+  });
+
+  it('add new OccupationalHealthcare entry', async () => {
+    await api
+      .post('/api/patients/d2773822-f723-11e9-8f0b-362b9e155667/entries')
+      .send({
+        date: '2019-08-05',
+        type: 'OccupationalHealthcare',
+        specialist: 'MD House',
+        employerName: 'HyPD',
+        diagnosisCodes: ['Z57.1', 'Z74.3', 'M51.2'],
+        description:
+          'Patient mistakenly found himself in a nuclear plant waste site without protection gear. Very minor radiation poisoning. ',
+        sickLeave: {
+          startDate: '2019-08-05',
+          endDate: '2019-08-28',
+        }
       })
       .expect(201);
   });
@@ -106,4 +143,18 @@ describe('unsuccessful /POST', () => {
     const check = await api.get('/api/patients');
     expect(check.body).toHaveLength(initLen);
   });
+
+  it('reject invalid type entry', async () => {
+    await api
+      .post('/api/patients/d2773822-f723-11e9-8f0b-362b9e155667/entries')
+      .send({
+        type: 'NonSpecified',
+        specialist: 'Dr. Kirby',
+        date: '2023-07-11',
+        description: 'Entry testing',
+        healthCheckRating: 3,
+      })
+      .expect(400);
+  });
+
 });
