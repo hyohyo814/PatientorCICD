@@ -56,7 +56,6 @@ jobs:
             start: yarn run start:complete
             wait-on: |
               http://localhost:3000
-              http://localhost:3001/api/patients
   tag_release:
     if: ${{ github.event_name == 'push' }}
     needs: [backend_deployment_pipeline, frontend_deployment_pipeline]
