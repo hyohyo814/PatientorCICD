@@ -142,6 +142,7 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
       <form onSubmit={addEntry}>
         <InputLabel>Entry Type</InputLabel>
         <Select
+          className='TypeSelect'
           sx={{
             mb: '14px',
           }}
@@ -151,6 +152,7 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
           onChange={onTypeChange}>
           {typeOptions.map((option) => (
             <MenuItem
+              className={option.label}
               key={option.label}
               value={option.value}>
               {option.label}
@@ -159,6 +161,7 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
         </Select>
         <InputLabel>Date</InputLabel>
         <TextField
+          className='DateInput'
           sx={{
             mb: '14px',
           }}
@@ -169,6 +172,7 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
           onChange={({ target }) => setDate(target.value)}
         />
         <TextField
+          className='SpecInput'
           sx={{
             mb: '14px',
           }}
@@ -178,6 +182,7 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
           onChange={({ target }) => setSpecialist(target.value)}
         />
         <TextField
+          className='DescInput'
           sx={{
             mb: '14px',
           }}
@@ -188,6 +193,7 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
         />
         <InputLabel>Diagnosis</InputLabel>
         <Select
+          className='DiagSelect'
           sx={{
             mb: '14px',
           }}
@@ -196,6 +202,7 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
           onChange={({ target }) => setDiagnosis(target.value)}
           endAdornment={
             <Button
+              className='DiagAdd'
               style={{
                 float: 'right',
               }}
@@ -204,8 +211,9 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
               Add
             </Button>
           }>
-          {diagnosesList.map((v) => (
+          {diagnosesList.map((v, k) => (
             <MenuItem
+              id={`diagnosis-${k}`}
               key={v.code}
               value={v.code}>
               {v.name}
@@ -251,6 +259,7 @@ const AddPatientForm = ({ onCancel, onSubmit, diagnosesList }: Props) => {
           </Grid>
           <Grid item>
             <Button
+              className='AddNewEntry'
               style={{
                 float: 'right',
               }}

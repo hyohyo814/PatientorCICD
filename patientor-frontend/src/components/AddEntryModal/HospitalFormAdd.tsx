@@ -13,6 +13,7 @@ const HospitalFormAdd = ({ setDate, setCriteria }: Props) => {
     <div>
       <InputLabel>Discharge Details</InputLabel>
       <TextField
+        className='DischargeDate'
         sx={{
           mb: '14px',
         }}
@@ -22,6 +23,7 @@ const HospitalFormAdd = ({ setDate, setCriteria }: Props) => {
         onChange={({target}) => setDate(target.value)}
       />
       <TextField
+        className='DischargeCriteria'
         sx={{
           mb: '14px',
         }}

@@ -18,7 +18,7 @@ interface RatingOption {
 
 console.log(Object.values(HealthCheckRating));
 
-let ratingOptions: RatingOption[] = [];
+const ratingOptions: RatingOption[] = [];
 void Object.values(HealthCheckRating).forEach((v) => {
   if (!isNaN(Number(v))) {
     ratingOptions.push({
@@ -47,6 +47,7 @@ const HealthCheckFormAdd = ({ setRating }: Props) => {
     <div>
       <InputLabel>Health Rating</InputLabel>
       <Select
+        className='RatingSelect'
         sx={{
           mb: '14px',
         }}
@@ -56,6 +57,7 @@ const HealthCheckFormAdd = ({ setRating }: Props) => {
         onChange={onRatingChange}>
         {ratingOptions.map((option) => (
           <MenuItem
+            id={option.label}
             key={option.label}
             value={option.value}>
             {option.label}

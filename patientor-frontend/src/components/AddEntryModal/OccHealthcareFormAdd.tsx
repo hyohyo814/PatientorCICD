@@ -17,6 +17,7 @@ const OccHealthcareFormAdd = ({
   return (
     <div>
       <TextField
+        className='EmployerInput'
         sx={{
           mb: '14px',
         }}
@@ -26,6 +27,7 @@ const OccHealthcareFormAdd = ({
       />
       <InputLabel>Sick Leave Period</InputLabel>
       <TextField
+        className='StartDateInput'
         sx={{
           mb: '14px',
         }}
@@ -35,6 +37,7 @@ const OccHealthcareFormAdd = ({
         onChange={({ target }) => setStartDate(target.value)}
       />
       <TextField
+        className='EndDateInput'
         sx={{
           mb: '14px',
         }}

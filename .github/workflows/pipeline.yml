@@ -25,10 +25,23 @@ jobs:
         run: |
           cd patientor-backend
           npm run lint
+      - name: build
+        run: |
+          cd patientor-backend
+          npm run tsc
+          cd ../patientor-frontend
+          npm run build
       - name: Run tests
         run: |
           cd patientor-backend
           npm run test --detectOpenHandles
+      - name: Run tests:e2e
+        run: |
+          cd patientor-backend
+          npm start
+          cd ../patientor-frontend
+          npm run start:prod
+          npm run test:e2e
   frontend_deployment_pipeline:
     if: ${{ !contains(github.event.head_commit.message, '#skip') }}
     runs-on: ubuntu-20.04
