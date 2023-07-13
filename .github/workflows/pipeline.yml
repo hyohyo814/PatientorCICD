@@ -40,9 +40,7 @@ jobs:
         with:
           node-version: '16'
       - name: Install dependencies
-        run: |
-          cd patientor-frontend
-          npm i
+        run: npm i
       - name: Check style
         run: |
           cd patientor-frontend
