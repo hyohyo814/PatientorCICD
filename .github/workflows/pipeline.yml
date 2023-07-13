@@ -56,13 +56,22 @@ jobs:
           cd patientor-frontend
           npm run build
       - name: Run tests:e2e
-        run: |
-          cd patientor-backend
-          npm run tsc
-          npm start
-          cd ../patientor-frontend
-          npm run start:prod
-          npm run test:e2e
+        uses: cypress-io/github-action@v5
+        with:
+            command: |
+              cd patientor-frontend
+              npm run test:e2e
+            build: |
+              cd patientor-frontend
+              npm run build
+            start: |
+              cd patientor-backend
+              npm start
+              cd ../patientor-frontend
+              npm run state:prod
+            wait-on: |
+              http://localhost:3000
+              http://localhost:3001/api/patients
   tag_release:
     if: ${{ github.event_name == 'push' }}
     needs: [backend_deployment_pipeline, frontend_deployment_pipeline]
