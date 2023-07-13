@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:complete": "concurrently \"cd patientor-backend && npm run tsc\" \"cd patientor-frontend && npm run build\"",
-    "start:complete": "concurrently \"cd patientor-backend && npm start\" \"cd patientor-frontend && npm run start:prod\"",
+    "start:complete": "concurrently \"cd patientor-backend && npm start\" \"cd patientor-frontend && npm start\"",
     "test:e2e": "cd patientor-frontend && npm run test:e2e"
   },
   "author": "",
