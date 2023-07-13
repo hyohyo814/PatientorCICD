@@ -40,7 +40,10 @@ jobs:
         with:
           node-version: '16'
       - name: Install dependencies
-        run: yarn
+        run: |
+          yarn
+          cd patientor-frontend
+          yarn
       - name: Check style
         run: |
           cd patientor-frontend
