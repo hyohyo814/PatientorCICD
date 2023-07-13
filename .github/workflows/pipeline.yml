@@ -25,10 +25,6 @@ jobs:
         run: |
           cd patientor-backend
           npm run lint
-      - name: build
-        run: |
-          cd patientor-backend
-          npm run tsc
       - name: Run tests
         run: |
           cd patientor-backend
@@ -51,24 +47,12 @@ jobs:
         run: |
           cd patientor-frontend
           npm run lint
-      - name: build
-        run: |
-          cd patientor-frontend
-          npm run build
       - name: Run tests:e2e
         uses: cypress-io/github-action@v5
         with:
-            command: |
-              cd patientor-frontend
-              npm run test:e2e
-            build: |
-              cd patientor-frontend
-              npm run build
-            start: |
-              cd patientor-backend
-              npm start
-              cd ../patientor-frontend
-              npm run state:prod
+            command: npm run test:e2e
+            build: npm run build:complete
+            start: npm run start:complete
             wait-on: |
               http://localhost:3000
               http://localhost:3001/api/patients

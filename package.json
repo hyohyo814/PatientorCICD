@@ -1,0 +1,16 @@
+{
+  "name": "patientorcicd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:complete": "concurrently \"cd patientor-backend && npm run tsc\" \"cd patientor-frontend && npm run build\"",
+    "start:complete": "concurrently \"cd patientor-backend && npm start\" \"cd patientor-frontend && npm run start:prod\"",
+    "test:e2e": "cd patientor-frontend && npm run test:e2e"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
