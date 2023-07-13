@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:complete": "concurrently \"cd patientor-backend && npm run tsc\" \"cd patientor-frontend && npm run build\"",
-    "start:complete": "concurrently \"cd patientor-backend && npm start\" \"cd patientor-frontend && npm start\"",
-    "test:e2e": "cd patientor-frontend && npm run test:e2e"
+    "build:complete": "cd patientor-backend && yarn run tsc",
+    "start:complete": "concurrently \"cd patientor-backend && yarn start\" \"cd patientor-frontend && yarn start\"",
+    "test:e2e": "cd patientor-frontend && yarn run test:e2e"
   },
   "author": "",
   "license": "ISC",
