@@ -58,6 +58,7 @@ jobs:
       - name: Run tests:e2e
         run: |
           cd patientor-backend
+          npm run tsc
           npm start
           cd ../patientor-frontend
           npm run start:prod
